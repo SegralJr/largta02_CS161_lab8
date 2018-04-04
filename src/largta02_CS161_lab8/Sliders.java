@@ -74,6 +74,9 @@ public class Sliders extends JFrame implements ChangeListener, ActionListener {
 		thisIsIt = new JButton("This is it!");
 		restart = new JButton("Re-start!");
 		
+		thisIsIt.addActionListener(this);
+		restart.addActionListener(this);
+		
 		checkingYourChoice = new JLabel("Checking your choice");
 		
 		north.add(blendTitle);
@@ -106,13 +109,13 @@ public class Sliders extends JFrame implements ChangeListener, ActionListener {
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() == R) {
+		if((JSlider)e.getSource() == R) {
 			RValue = R.getValue();
 		}
-		else if(e.getSource() == G) {
+		else if((JSlider)e.getSource() == G) {
 			GValue = G.getValue();
 		}
-		else if(e.getSource() == B) {
+		else if((JSlider)e.getSource() == B) {
 			BValue = B.getValue();
 		}
 		colorPicker.setBackground(new Color(RValue,GValue,BValue));
@@ -121,11 +124,17 @@ public class Sliders extends JFrame implements ChangeListener, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() == "This is it!") {
+		if("This is it!".equals(e.getActionCommand())) {
 			selection.setBackground(new Color(RValue,GValue,BValue));
+			R.setEnabled(false);
+			G.setEnabled(false);
+			B.setEnabled(false);
 		}
-		else if(e.getSource() == "Re-start!") {
+		else if("Re-start!".equals(e.getActionCommand())) {
 			//R.setValue(R.getMaximum());
+			R.setEnabled(true);
+			G.setEnabled(true);
+			B.setEnabled(true);
 		}
 	}
 
